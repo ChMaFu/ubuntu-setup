@@ -1,3 +1,5 @@
+#! /usr/bin/zsh
+
 echo '########## <updating and upgrade> ##########'
 sudo apt-get update 
 sudo dpkg --configure -a
@@ -6,19 +8,14 @@ sudo apt-get upgrade -y
 echo '########## <updating snap> ##########'
 sudo snap refresh
 
-sudo bash -c 'cat <<EOF > /usr/local/bin/upgrade-all.sh
+sudo bash -c 'cat <<EOF > ./upgrade-all.sh
 sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 sudo apt -y autoremove
 sudo apt-get clean
 EOF'
-sudo chmod +x /usr/local/bin/upgrade-all.sh
-
-sudo wget -O /usr/local/bin/contribs.sh https://gist.githubusercontent.com/jfollmann/5de0713c62d8a4a2381154601decd74a/raw/2ac9171efcdd650e0634567fd6bf4898c7eedb00/contribs.sh
-sudo chmod +x /usr/local/bin/contribs.sh
-
-mkdir -p ~/Projects
+sudo chmod +x ./upgrade-all.sh
 
 echo '########## <installing curl> ##########'
 sudo apt install curl -y -f
@@ -44,26 +41,7 @@ ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub | xclip -selection clipboard
 
 echo '########## <installing vscode> ##########'
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-sudo sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-sudo apt-get install apt-transport-https -y  -f
-sudo apt-get update
-sudo apt-get install code -y -f
-rm -rf packages.microsoft.gpg
-
-echo '########## <installing settings-sync extension> ##########'
-code --install-extension shan.code-settings-sync
-
-echo '########## <installing chrome> ##########'
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-
-rm -rf google-chrome-stable_current_amd64.deb
-
-echo '########## <installing terminator> ##########'
-sudo apt-get update
-sudo apt-get install terminator -y  -f
+sudo snap install code
 
 echo '########## <installing docker> ##########'
 sudo apt-get remove docker docker-engine docker.io -y
@@ -90,28 +68,11 @@ wget -qO - https://azlux.fr/repo.gpg.key | sudo apt-key add -
 sudo apt update
 sudo apt install docker-ctop
 
-echo '########## <installing spotify> ##########'
-sudo snap install spotify
-
 echo '########## <installing vlc player> ##########'
 sudo snap install vlc
 
-echo '########## <installing insomnia> ##########'
-sudo snap install insomnia
-
-echo '########## <installing peek> ##########'
-sudo add-apt-repository ppa:peek-developers/stable -y
-sudo apt-get update
-sudo apt-get install peek -y
-
-echo '########## <installing chrome-gnome-shell> ##########'
-sudo apt-get install chrome-gnome-shell
-
 echo '########## <installing tree> ##########'
 sudo apt-get install tree -y
-
-echo '########## <installing beekeeper-studio> ##########'
-sudo snap install beekeeper-studio
 
 echo '########## <installing zsh> ##########'
 sudo apt-get install zsh -y
@@ -120,14 +81,15 @@ sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install
 echo '########## <installing jq> ##########'
 sudo apt-get install jq -y
 
-# echo '########## <installing terraform> ##########'
-# curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-# sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-# sudo apt-get update && sudo apt-get install terraform
-# terraform -v
+echo '########## <installing Golang> ##########'
+sudo apt-get install golang
 
-echo "########## --> That’s all folks! <-- ##########"
-echo "Restart computer for you? (y/n)"
+echo '########## <install Rust> ##########'
+sudo apt install -y build-essential
+curl https://sh.rustup.rs -sSf | sh
+source $HOME/.cargo/env
+rustc --version
+
 read restart_computer
 if echo "$restart_computer" | grep -iq "^y" ;then
 	sudo shutdown -r 0

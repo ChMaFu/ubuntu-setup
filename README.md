@@ -1,13 +1,11 @@
-# Welcome to ubuntu-setup 👑
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000) 
-![CI](https://github.com/jfollmann/ubuntu-setup/workflows/CI/badge.svg) 
+# Chris's Ubuntu Setup
 
-> Project with the purpose of setting up a development environment on ubuntu.
+My basic Ubuntu development setup for dekstop and Raspberry Pi (arm64) Ubuntu
 
 ## Install
 
 ```sh
-git clone git@github.com:jfollmann/ubuntu-setup.git
+git clone git@github.com:chmafu/ubuntu-setup.git
 cd ubuntu-setup
 ```
 
@@ -18,40 +16,23 @@ cd ubuntu-setup
 - Generate a SSH Key
 - [Install git](https://git-scm.com/)
 - [Install vscode](https://code.visualstudio.com/)
-- [Install vscode settings-sync extension](https://marketplace.visualstudio.com/items?itemName=Shan.code-settings-sync)
-- [Install chrome](https://www.google.com/intl/pt-BR/chrome/)
-- [Install terminator](http://cmsj.net/p/terminator.html)
 - [Install docker](https://docs.docker.com/get-docker/)
 - [Install docker-compose ](https://docs.docker.com/compose/install/)
 - [ctop](https://github.com/bcicen/ctop)
-- [Install spotify](https://www.spotify.com/br/)
 - [Install vlc](https://www.videolan.org/)
-- [Install insomnia](https://insomnia.rest/download)
-- [Install peek](https://github.com/phw/peek)
-- [Chrome gnome-shell](https://chrome.google.com/webstore/detail/gnome-shell-integration/gphhapmejobijbbhgpjhcjognlahblep)
 - [Install tree](https://snapcraft.io/install/tree/ubuntu)
-- [Beekeeper studio](https://www.beekeeperstudio.io/)
 - [Install zsh](https://www.zsh.org/)
 - [Install jq](https://stedolan.github.io/jq/)
+- [Install Golang](https://golang.org/)
+- [Install Rust](https://www.rust-lang.org/)
 
 ## Run scripts
 ```sh
- bash 01-install.all.sh
- bash 02-personal.settings.sh
+chmod +x *.sh
+ ./01-install.all.sh
+ ./02-personal.settings.sh
 ```
 
 ## Author
 
-👤 **Jefferson Follmann**
-
-* Twitter: [@jfollmann](https://twitter.com/jfollmann)
-* Github: [@jfollmann](https://github.com/jfollmann)
-* LinkedIn: [@jfollmann](https://linkedin.com/in/jfollmann)
-
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
+**Chris Fussell** (Forked from Jefferson Follmann's [repo](https://github.com/jfollmann/ubuntu-setup))
